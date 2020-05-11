@@ -1,87 +1,25 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
-    <script>
-
-        async function get_facemesh() {
-        
-            var canvas2 = document.getElementById("plot2");
-
-            /* get video stream */
-            const stream = document.querySelector("video");
-
-            /* running facemesh code */
-            const model = await facemesh.load();
-            const faces = await model.estimateFaces(stream);
-
-            if (faces.length != 0) {
-                var mesh = faces[0].scaledMesh;
-
-                console.log(mesh);
-
-          
-                var draw2 = canvas2.getContext("2d");
-
-                /* fill canvas1 with video stream */
-                //draw1.drawImage(stream, 0, 0, width = canvas1.width, height = canvas1.height);
-
-                /* fill canvas2 with black background */
-                draw2.fillStyle = "black";
-                draw2.fillRect(0, 0, canvas2.width, canvas2.height);
-
-                /* highlight facial landmark points on both canvas boards */
-                //draw1.fillStyle = "#00FF00";
-                draw2.fillStyle = "#00FF00";
-
-                for (i = 0; i < mesh.length; i++) {
-                    var [x, y, z] = mesh[i];
-
-                    /* scale co-ordinates to fit in canvas */
-
-                    x = (x * canvas2.width) / 640;
-                    y = (y * canvas2.height) / 480;
-
-                    draw2.fillRect(Math.round(x), Math.round(y), 2, 2);
-                }
-            }
-            else {
-                console.log(`no faces detected..`);
-            }
-        }
-
-
-
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face-mask</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+  <video muted id="webcam"></video>
+  <canvas id="faceCanvas"></canvas>
 
-    <video width=550 height=350 autoplay> </video>
-    <canvas width=550 height=350 id="plot2"> </canvas>
-
-    <br>
-    <script>
-        /* capture video stream from webcam */
-        var video = document.querySelector("video");
-        if (navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function (stream) {
-                    video.srcObject = stream;
-
-                    /* loop to create facemesh */
-                    count = 1;
-                    while (count < 250) {
-                        get_facemesh();
-                        count += 1;
-                    }
-
-                });
-        }
-    </script>
+  <!-- <script src="lib/tf-js-facemesh.js"></script> -->
+  <script src="lib/triangulation.js"></script>
+  <script src="js/calculateNormals.js"></script>
+  <script src="js/textureMap.js"></script>
+  <script src="js/m4.js"></script>
+  <script src="js/webgl-utils.js"></script>
+  <script src="js/FaceMask.js"></script>
+  <script src="js/script.js"></script>
 </body>
-
 </html>
