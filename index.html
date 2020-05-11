@@ -1,0 +1,43 @@
+<head>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
+<script>
+	// Load the MediaPipe facemesh model assets.
+	const model = await facemesh.load();
+	 
+	// Pass in a video stream to the model to obtain 
+	// an array of detected faces from the MediaPipe graph.
+	const video = document.querySelector("video");
+	const faces = await model.estimateFaces(video);
+	 
+	// Each face object contains a `scaledMesh` property,
+	// which is an array of 468 landmarks.
+	faces.forEach(face => console.log(face.scaledMesh));
+</script>
+<style>
+  .canvas-wrapper, #scatter-gl-container {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  #scatter-gl-container {
+    border: solid 1px black;
+    position: relative;
+  }
+
+  /* center the canvas within its wrapper */
+  #scatter-gl-container canvas {
+    transform: translate3d(-50%, -50%, 0);
+    left: 50%;
+    top: 50%;
+    position: absolute;
+  }
+</style>
+</head>
+<body>
+  <div id="main">
+    <div class="container">
+
+  </div>
+</body>
