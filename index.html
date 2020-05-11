@@ -1,43 +1,105 @@
+<html>
+
 <head>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
-<script>
-	// Load the MediaPipe facemesh model assets.
-	const model = await facemesh.load();
-	 
-	// Pass in a video stream to the model to obtain 
-	// an array of detected faces from the MediaPipe graph.
-	const video = document.querySelector("video");
-	const faces = await model.estimateFaces(video);
-	 
-	// Each face object contains a `scaledMesh` property,
-	// which is an array of 468 landmarks.
-	faces.forEach(face => console.log(face.scaledMesh));
-</script>
-<style>
-  .canvas-wrapper, #scatter-gl-container {
-    display: inline-block;
-    vertical-align: top;
-  }
 
-  #scatter-gl-container {
-    border: solid 1px black;
-    position: relative;
-  }
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
 
-  /* center the canvas within its wrapper */
-  #scatter-gl-container canvas {
-    transform: translate3d(-50%, -50%, 0);
-    left: 50%;
-    top: 50%;
-    position: absolute;
+  <script>
+
+  /* running facemesh code */
+  async function get_facemesh()
+  {
+
+    // load HTML canvas
+    var canvas = document.getElementById("facemesh");
+    var draw = canvas.getContext("2d");
+
+    // get video stream
+    const stream = document.getElementById("video");
+
+    // load facemesh model
+    const model = await facemesh.load();
+
+    // process input stream frame by frame
+    while(1)
+    {
+
+      // fill canvas with black background
+      draw.fillStyle = "blue";
+      draw.fillRect(0, 0, canvas.width, canvas.height);
+
+      // detect faces
+      const faces = await model.estimateFaces(stream);
+
+      if(faces.length != 0)
+      {
+        // loop through faces array to capture multiple faces
+        var mesh = faces[0].scaledMesh;
+
+        //console.log(mesh);
+
+        /* highlight facial landmark points on canvas board */
+        draw.fillStyle = "#FFFFFF";
+
+        for(i=0; i< mesh.length; i++)
+        {
+          var [x, y, z] = mesh[i];
+          draw.fillRect(Math.round(x), Math.round(y), 2, 2);
+        }
+      }
+      else
+      {
+        console.log(`no faces detected..`);
+      }
+
+      // loop to process the next frame
+      await tf.nextFrame();
+    }
   }
-</style>
+  </script>
 </head>
-<body>
-  <div id="main">
-    <div class="container">
 
-  </div>
+<body>
+
+  <video width=640 height=480 autoplay id="video"> </video>
+  <canvas width=640 height=480 id="facemesh"> </canvas>
+
+  <br>
+  <script>
+
+    function live_webcam()
+    {
+      // capture live video stream from web camera
+      if(navigator.mediaDevices.getUserMedia)
+      {
+        navigator.mediaDevices.getUserMedia({video: true})
+          .then(function (stream) {video.srcObject = stream; });
+      }
+    }
+
+    function main()
+    {
+      // check if the video is loaded and ready for processing
+      video = document.getElementById("video");
+      if(video.readyState == 4)
+      {
+        console.log("video is ready for processing..");
+        get_facemesh();
+      }
+      else
+      {
+        console.log("nope, not loaded yet..");
+        setTimeout(main, 1000/30);
+      }
+    }
+
+    // capture live stream and run face-mesh once the video is ready for processing
+    live_webcam();
+    main();
+
+  </script>
 </body>
+
+</html>
