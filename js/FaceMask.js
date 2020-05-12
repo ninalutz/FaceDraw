@@ -108,10 +108,8 @@ void main() {
     
     // Asynchronously load an image
     var image = new Image();
-    //image.src = "mesh_map.jpg";
     image.src = this._textureFilePath;
     image.crossOrigin ="anonymous"; // ask for CORS permission
-    // image.src = "https://ninalutz.github.io/me.png"
     image.addEventListener('load', () => {
       // Now that the image has loaded make copy it to the texture.
       this._gl.bindTexture(this._gl.TEXTURE_2D, texture);
