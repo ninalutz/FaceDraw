@@ -22,6 +22,10 @@ body{
   background:black;
 }
 
+a {
+  color: hotpink;
+}
+
 .column {
   float: left;
   width: 20%;
