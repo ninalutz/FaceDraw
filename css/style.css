@@ -1,4 +1,4 @@
-html, body {
+html{
   width: 100vw;
   height: 100vh;
   height: -webkit-fill-available;
@@ -6,9 +6,38 @@ html, body {
   pointer-events: none;
   margin: 10;
   margin-left: 70px;
-  margin-right: 70px;
+  margin-right: 40px;
   display: flex;
   background:black;
+}
+
+body{
+  width: 80vw;
+  height: 100vh;
+  height: -webkit-fill-available;
+  touch-action: none;
+  pointer-events: none;
+  margin: 0;
+  display: flex;
+  background:black;
+}
+
+.column {
+  float: left;
+  width: 20%;
+}
+
+.columnR {
+  float: right;
+  width: 80%;
+}
+
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 p, h4{
@@ -17,8 +46,8 @@ p, h4{
 
 #faceCanvas,
 #webcam {
-  width: 80vw;
-  height: 80vh;
+  width: 75vw;
+  height: 75vh;
   object-fit: cover;
   position: absolute;
 }
