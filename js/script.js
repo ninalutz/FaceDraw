@@ -11,7 +11,7 @@ async function renderPredictions(t) {
     var normalBufferData = calculateNormals(TRIANGULATION, positionBufferData);
     if(!faceCanvas) {
       const props = {
-        textureFilePath: 'assets/mesh_map10.jpg', 
+        textureFilePath: 'assets/mesh_map' +Math.floor((Math.random() * 12) + 0)+'.jpg', 
         w, h, positionBufferData, normalBufferData
       }
       faceCanvas = new FaceMask('faceCanvas', props);
