@@ -110,7 +110,7 @@ void main() {
     var image = new Image();
     //image.src = "mesh_map.jpg";
     image.src = this._textureFilePath;
-    image.crossOrigin =''; // ask for CORS permission
+    image.crossOrigin ="anonymous"; // ask for CORS permission
     // image.src = "https://ninalutz.github.io/me.png"
     image.addEventListener('load', () => {
       // Now that the image has loaded make copy it to the texture.
