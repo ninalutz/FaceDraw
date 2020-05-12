@@ -11,10 +11,10 @@ function preload(){
 function setup() {
   createCanvas(800, 800)
   c = createVector(width/2,height/2)
+  image(img, 0, 0, 800, 800)
 }
 
-function draw() {
-  image(img, 0, 0, 800, 800)
+function draw() { 
   if(mouseIsPressed){
     let pos = createVector(mouseX,mouseY)
     let ppos = createVector(pmouseX,pmouseY)
