@@ -27,15 +27,7 @@ function draw() {
       line(ppos.x,ppos.y,pos.x,pos.y)
     }
   }
-  // noStroke();
-  // fill(0, 0, 0, 5);
-  // rect(0, 0, width, height);
-  // if(second() > 0 && second() <410)numDrawings = 2;
-  // if(second() >= 10 && second() < 20) numDrawings = 4;
-  // if(second() >= 20 && second() < 30) numDrawings = 6;
-  // if(second() >= 30 && second() < 40) numDrawings = 8;
-  // if(second() >= 40 && second() < 50) numDrawings = 10;
-  // if(second() >= 50 && second() < 60) numDrawings = 10;
+
 }
 
 // Calculate the symmetric of a point with respect to a line defined by a point(c) and a vector(u)

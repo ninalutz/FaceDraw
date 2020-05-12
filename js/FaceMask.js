@@ -1,3 +1,7 @@
+/*
+Modified from various repos by Nina Lutz 2020 
+*/
+
 class FaceMask {
   static get VERTEX_SHADER_SOURCE() {
     return /* GLSL */`

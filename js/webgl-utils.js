@@ -1,4 +1,6 @@
 /*
+ * Modified by Nina Lutz 2020 
+ *
  * Copyright 2012, Gregg Tavares.
  * All rights reserved.
  *

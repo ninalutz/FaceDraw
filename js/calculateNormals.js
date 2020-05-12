@@ -1,11 +1,14 @@
-var calculateNormals;
-(function() {
   /**
+   * Forked from some of these folks: 
+   Mods by Nina Lutz 2020 
    * @author alteredq / http://alteredqualia.com/
    * @author mrdoob / http://mrdoob.com/
    * @author WestLangley / http://github.com/WestLangley
    * @author thezwap
    */
+
+var calculateNormals;
+(function() {
 
   var _lut = [];
 

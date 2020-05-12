@@ -1,3 +1,6 @@
+/*
+Portions taken and adopted from various repos utilizing mediapipe by Nina Lutz 2020 
+*/
 (function() {
 var webcam = document.querySelector('#webcam');
 var model, faceCanvas, w, h;

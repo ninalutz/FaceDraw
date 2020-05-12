@@ -1,5 +1,8 @@
 /*
- * Copyright 2014, Gregg Tavares.
+ * Modified by Nina Lutz 2020 May 
+  Original: 
+  
+ Copyright 2014, Gregg Tavares.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
