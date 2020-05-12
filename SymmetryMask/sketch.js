@@ -1,5 +1,5 @@
 var c, phue
-var numDrawings = 2 // Even numbers work better
+var numDrawings = 4 // Even numbers work better
 var lineWeight = 2
 let img;
 
