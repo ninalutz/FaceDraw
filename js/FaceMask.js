@@ -110,6 +110,7 @@ void main() {
     var image = new Image();
     image.src = this._textureFilePath;
     image.crossOrigin ="anonymous"; // ask for CORS permission
+
     image.addEventListener('load', () => {
       // Now that the image has loaded make copy it to the texture.
       this._gl.bindTexture(this._gl.TEXTURE_2D, texture);
